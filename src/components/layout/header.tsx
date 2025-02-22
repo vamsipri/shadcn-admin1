@@ -40,6 +40,7 @@ export const Header = ({
     >
       <SidebarTrigger variant='outline' className='scale-125 sm:scale-100' />
       <Separator orientation='vertical' className='h-6' />
+      <h1>vamsi</h1>
       {children}
     </header>
   )
