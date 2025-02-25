@@ -189,12 +189,12 @@ export default function Dashboard() {
 }
 
 const topNav = [
-  {
-    title: 'Overview',
-    href: 'dashboard/overview',
-    isActive: true,
-    disabled: false,
-  },
+  // {
+  //   title: 'Overview',
+  //   href: 'dashboard/overview',
+  //   isActive: true,
+  //   disabled: false,
+  // },
   {
     title: 'Customers',
     href: 'dashboard/customers',

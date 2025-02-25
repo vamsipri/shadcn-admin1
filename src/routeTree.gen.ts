@@ -86,7 +86,7 @@ const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
 
 const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   id: '/',
-  path: '/',
+  path:'/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
