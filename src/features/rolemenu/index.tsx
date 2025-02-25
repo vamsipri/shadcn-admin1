@@ -20,9 +20,11 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { apps } from './data/rolemenu'
+import { useRouter } from '@tanstack/react-router'
 
 
 export default function RoleMenu() {
+  const router = useRouter();
   const [sort, setSort] = useState('ascending')
   // const [appType, setAppType] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
@@ -113,7 +115,7 @@ export default function RoleMenu() {
                   variant='outline'
                   size='sm'
                   // className={`${app.connected ? 'border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900' : ''}`}
-                  onClick={() => window.location.href = '/raw-bom'}
+                  onClick={() => router.navigate({to : '/raw-bom'})}
                   >
                   {/* {app.connected ? 'Connected' : 'Connect with this'} */}
                   Open
