@@ -24,7 +24,7 @@ import { apps } from './data/rolemenu'
 
 export default function RoleMenu() {
   const [sort, setSort] = useState('ascending')
-  const [appType, setAppType] = useState('all')
+  // const [appType, setAppType] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredApps = apps
@@ -33,14 +33,14 @@ export default function RoleMenu() {
         ? a.name.localeCompare(b.name)
         : b.name.localeCompare(a.name)
     )
-    .filter((app) =>
-      appType === 'connected'
-        ? app.connected
-        : appType === 'notConnected'
-          ? !app.connected
-          : true
-    )
-    .filter((app) => app.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    // .filter((app) =>
+    //   appType === 'connected'
+    //     ? app.connected
+    //     : appType === 'notConnected'
+    //       ? !app.connected
+    //       : true
+    // )
+    // .filter((app) => app.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
     <>
