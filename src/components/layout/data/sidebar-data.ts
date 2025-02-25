@@ -50,7 +50,7 @@ export const sidebarData: SidebarData = {
       title: 'General',
       items: [
         {
-          title: 'My Dashboard',
+          title: 'Dashboard',
           url: '/',
           icon: IconLayoutDashboard,
         },
