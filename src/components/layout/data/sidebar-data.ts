@@ -70,10 +70,21 @@ export const sidebarData: SidebarData = {
           icon: IconPackages,
         },
         {
+          title: 'Raw BOM Files',
+          url: '/raw-bom',
+          icon: IconPackages,
+        },
+        {
           title: 'Apps',
           url: '/apps',
           icon: IconPackages,
         },
+        {
+          title: 'RoleMenu',
+          url: '/role-menu',
+          icon: IconPackages,
+        },
+        
         {
           title: 'Chats',
           url: '/chats',

@@ -1,11 +1,13 @@
 import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+// import { useNavigate } from '@tanstack/react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useRouter } from '@tanstack/react-router' 
 import {
   Form,
   FormControl,
@@ -36,7 +38,8 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
-
+  // const navigate = useNavigate()
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,9 +52,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true)
     // eslint-disable-next-line no-console
     console.log(data)
-
+    router.navigate({ to: '/role-menu' })
     setTimeout(() => {
       setIsLoading(false)
+      // router.navigate({ to: '/' })
     }, 3000)
   }
 

@@ -1,0 +1,50 @@
+
+export const raws = [
+    {
+      id: 1,
+      status: "Active",
+      date: "2024-02-24",
+      rawBomFileName: "report.pdf",
+      path: "/files/report.pdf",
+      actions: "Delete",
+    },
+    {
+      id: 2,
+      status: "Active",
+      date: "2024-02-23",
+      rawBomFileName: "invoice.xlsx",
+      path: "/files/invoice.xlsx",
+      actions: "Delete",
+    },
+    {
+      id: 3,
+      status: "inactive",
+      date: "2024-02-22",
+      rawBomFileName: "document.docx",
+      path: "/files/document.docx",
+      actions: "Delete",
+    },
+    {
+      id: 4,
+      status: "In Progress",
+      date: "2024-02-22",
+      rawBomFileName: "document.pdf",
+      path: "/files/document.docx",
+      actions: "Delete",
+    },{
+      id: 5,
+      status: "In Progress",
+      date: "2024-02-22",
+      rawBomFileName: "document.docx",
+      path: "/files/document.docx",
+      actions: "Delete",
+    },
+    {
+      id: 6,
+      status: "In Progress",
+      date: "2024-02-22",
+      rawBomFileName: "document.pdf",
+      path: "/files/document.docx",
+      actions: "Delete",
+    },
+  ];

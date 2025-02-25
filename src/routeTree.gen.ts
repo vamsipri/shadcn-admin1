@@ -46,6 +46,12 @@ const AuthenticatedTasksIndexLazyImport = createFileRoute(
 const AuthenticatedSettingsIndexLazyImport = createFileRoute(
   '/_authenticated/settings/',
 )()
+const AuthenticatedRoleMenuIndexLazyImport = createFileRoute(
+  '/_authenticated/role-menu/',
+)()
+const AuthenticatedRawBomIndexLazyImport = createFileRoute(
+  '/_authenticated/raw-bom/',
+)()
 const AuthenticatedItemsIndexLazyImport = createFileRoute(
   '/_authenticated/items/',
 )()
@@ -211,6 +217,24 @@ const AuthenticatedSettingsIndexLazyRoute =
     getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/settings/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedRoleMenuIndexLazyRoute =
+  AuthenticatedRoleMenuIndexLazyImport.update({
+    id: '/role-menu/',
+    path: '/role-menu/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/role-menu/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedRawBomIndexLazyRoute =
+  AuthenticatedRawBomIndexLazyImport.update({
+    id: '/raw-bom/',
+    path: '/raw-bom/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/raw-bom/index.lazy').then((d) => d.Route),
   )
 
 const AuthenticatedItemsIndexLazyRoute =
@@ -454,6 +478,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedItemsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/raw-bom/': {
+      id: '/_authenticated/raw-bom/'
+      path: '/raw-bom'
+      fullPath: '/raw-bom'
+      preLoaderRoute: typeof AuthenticatedRawBomIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/role-menu/': {
+      id: '/_authenticated/role-menu/'
+      path: '/role-menu'
+      fullPath: '/role-menu'
+      preLoaderRoute: typeof AuthenticatedRoleMenuIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
@@ -520,6 +558,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedItemsIndexLazyRoute: typeof AuthenticatedItemsIndexLazyRoute
+  AuthenticatedRawBomIndexLazyRoute: typeof AuthenticatedRawBomIndexLazyRoute
+  AuthenticatedRoleMenuIndexLazyRoute: typeof AuthenticatedRoleMenuIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedTemplatesIndexLazyRoute: typeof AuthenticatedTemplatesIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
@@ -533,6 +573,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedItemsIndexLazyRoute: AuthenticatedItemsIndexLazyRoute,
+  AuthenticatedRawBomIndexLazyRoute: AuthenticatedRawBomIndexLazyRoute,
+  AuthenticatedRoleMenuIndexLazyRoute: AuthenticatedRoleMenuIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
   AuthenticatedTemplatesIndexLazyRoute: AuthenticatedTemplatesIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
@@ -563,6 +605,8 @@ export interface FileRoutesByFullPath {
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/items': typeof AuthenticatedItemsIndexLazyRoute
+  '/raw-bom': typeof AuthenticatedRawBomIndexLazyRoute
+  '/role-menu': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/templates': typeof AuthenticatedTemplatesIndexLazyRoute
@@ -589,6 +633,8 @@ export interface FileRoutesByTo {
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/items': typeof AuthenticatedItemsIndexLazyRoute
+  '/raw-bom': typeof AuthenticatedRawBomIndexLazyRoute
+  '/role-menu': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/templates': typeof AuthenticatedTemplatesIndexLazyRoute
@@ -619,6 +665,8 @@ export interface FileRoutesById {
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexLazyRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/_authenticated/items/': typeof AuthenticatedItemsIndexLazyRoute
+  '/_authenticated/raw-bom/': typeof AuthenticatedRawBomIndexLazyRoute
+  '/_authenticated/role-menu/': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/templates/': typeof AuthenticatedTemplatesIndexLazyRoute
@@ -649,6 +697,8 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/items'
+    | '/raw-bom'
+    | '/role-menu'
     | '/settings/'
     | '/tasks'
     | '/templates'
@@ -674,6 +724,8 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/items'
+    | '/raw-bom'
+    | '/role-menu'
     | '/settings'
     | '/tasks'
     | '/templates'
@@ -702,6 +754,8 @@ export interface FileRouteTypes {
     | '/_authenticated/chats/'
     | '/_authenticated/help-center/'
     | '/_authenticated/items/'
+    | '/_authenticated/raw-bom/'
+    | '/_authenticated/role-menu/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/templates/'
@@ -772,6 +826,8 @@ export const routeTree = rootRoute
         "/_authenticated/chats/",
         "/_authenticated/help-center/",
         "/_authenticated/items/",
+        "/_authenticated/raw-bom/",
+        "/_authenticated/role-menu/",
         "/_authenticated/tasks/",
         "/_authenticated/templates/",
         "/_authenticated/users/"
@@ -855,6 +911,14 @@ export const routeTree = rootRoute
     },
     "/_authenticated/items/": {
       "filePath": "_authenticated/items/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/raw-bom/": {
+      "filePath": "_authenticated/raw-bom/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/role-menu/": {
+      "filePath": "_authenticated/role-menu/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/": {
