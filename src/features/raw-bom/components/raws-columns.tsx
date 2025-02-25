@@ -1,20 +1,17 @@
-import { ColumnDef } from '@tanstack/react-table'
-// import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
-import LongText from '@/components/long-text'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
-import { Raw } from '../data/schema'
+import { ColumnDef } from '@tanstack/react-table';
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
+import LongText from '@/components/long-text';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import { Raw } from '../data/schema';
+
 export const columns: ColumnDef<Raw>[] = [
   {
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
+        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
         className='translate-y-[2px]'
@@ -31,18 +28,14 @@ export const columns: ColumnDef<Raw>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  
   {
     accessorKey: 'status',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
-    cell: ({ row }) => {
-      const { status } = row.original
-      return (
-        <Badge variant='outline' className='capitalize'>
-          {status}
-        </Badge>
-      )
-    },
+    cell: ({ row }) => (
+      <Badge variant='outline' className='capitalize'>
+        {row.original.status}
+      </Badge>
+    ),
   },
   {
     accessorKey: 'date',
@@ -60,8 +53,10 @@ export const columns: ColumnDef<Raw>[] = [
     cell: ({ row }) => <LongText className='max-w-36'>{row.getValue('path')}</LongText>,
   },
   {
-    id: 'actions',
-    accessorKey: 'Actions',
-    cell: DataTableRowActions,
+    id: 'actions', // Remove accessorKey
+    accessorKey:"actions",
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Actions' />,
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
-]
+];
+
