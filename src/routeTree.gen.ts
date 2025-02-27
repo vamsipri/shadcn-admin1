@@ -52,6 +52,9 @@ const AuthenticatedRoleMenuIndexLazyImport = createFileRoute(
 const AuthenticatedRawBomIndexLazyImport = createFileRoute(
   '/_authenticated/raw-bom/',
 )()
+const AuthenticatedMytasksIndexLazyImport = createFileRoute(
+  '/_authenticated/mytasks/',
+)()
 const AuthenticatedItemsIndexLazyImport = createFileRoute(
   '/_authenticated/items/',
 )()
@@ -84,9 +87,10 @@ const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+
 const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   id: '/',
-  path:'/',
+  path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -237,6 +241,15 @@ const AuthenticatedRawBomIndexLazyRoute =
     import('./routes/_authenticated/raw-bom/index.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedMytasksIndexLazyRoute =
+  AuthenticatedMytasksIndexLazyImport.update({
+    id: '/mytasks/',
+    path: '/mytasks/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/mytasks/index.lazy').then((d) => d.Route),
+  )
+
 const AuthenticatedItemsIndexLazyRoute =
   AuthenticatedItemsIndexLazyImport.update({
     id: '/items/',
@@ -350,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof authSignInImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authenticated/dashboard/':{
+      id:'/_authenticated/dashboard/'
+      path:'/dashboard'
+      fullPath:'/dashboard'
+      preLoaderRoute: typeof authDashBoardnImport
       parentRoute: typeof rootRoute
     }
     '/_authenticated/settings': {
@@ -478,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedItemsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/mytasks/': {
+      id: '/_authenticated/mytasks/'
+      path: '/mytasks'
+      fullPath: '/mytasks'
+      preLoaderRoute: typeof AuthenticatedMytasksIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/raw-bom/': {
       id: '/_authenticated/raw-bom/'
       path: '/raw-bom'
@@ -558,6 +585,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedItemsIndexLazyRoute: typeof AuthenticatedItemsIndexLazyRoute
+  AuthenticatedMytasksIndexLazyRoute: typeof AuthenticatedMytasksIndexLazyRoute
   AuthenticatedRawBomIndexLazyRoute: typeof AuthenticatedRawBomIndexLazyRoute
   AuthenticatedRoleMenuIndexLazyRoute: typeof AuthenticatedRoleMenuIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
@@ -573,6 +601,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedItemsIndexLazyRoute: AuthenticatedItemsIndexLazyRoute,
+  AuthenticatedMytasksIndexLazyRoute: AuthenticatedMytasksIndexLazyRoute,
   AuthenticatedRawBomIndexLazyRoute: AuthenticatedRawBomIndexLazyRoute,
   AuthenticatedRoleMenuIndexLazyRoute: AuthenticatedRoleMenuIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
@@ -605,6 +634,7 @@ export interface FileRoutesByFullPath {
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/items': typeof AuthenticatedItemsIndexLazyRoute
+  '/mytasks': typeof AuthenticatedMytasksIndexLazyRoute
   '/raw-bom': typeof AuthenticatedRawBomIndexLazyRoute
   '/role-menu': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
@@ -633,6 +663,7 @@ export interface FileRoutesByTo {
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/items': typeof AuthenticatedItemsIndexLazyRoute
+  '/mytasks': typeof AuthenticatedMytasksIndexLazyRoute
   '/raw-bom': typeof AuthenticatedRawBomIndexLazyRoute
   '/role-menu': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
@@ -665,6 +696,7 @@ export interface FileRoutesById {
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexLazyRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/_authenticated/items/': typeof AuthenticatedItemsIndexLazyRoute
+  '/_authenticated/mytasks/': typeof AuthenticatedMytasksIndexLazyRoute
   '/_authenticated/raw-bom/': typeof AuthenticatedRawBomIndexLazyRoute
   '/_authenticated/role-menu/': typeof AuthenticatedRoleMenuIndexLazyRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
@@ -697,6 +729,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/items'
+    | '/mytasks'
     | '/raw-bom'
     | '/role-menu'
     | '/settings/'
@@ -724,6 +757,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/items'
+    | '/mytasks'
     | '/raw-bom'
     | '/role-menu'
     | '/settings'
@@ -754,6 +788,7 @@ export interface FileRouteTypes {
     | '/_authenticated/chats/'
     | '/_authenticated/help-center/'
     | '/_authenticated/items/'
+    | '/_authenticated/mytasks/'
     | '/_authenticated/raw-bom/'
     | '/_authenticated/role-menu/'
     | '/_authenticated/settings/'
@@ -826,6 +861,7 @@ export const routeTree = rootRoute
         "/_authenticated/chats/",
         "/_authenticated/help-center/",
         "/_authenticated/items/",
+        "/_authenticated/mytasks/",
         "/_authenticated/raw-bom/",
         "/_authenticated/role-menu/",
         "/_authenticated/tasks/",
@@ -911,6 +947,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/items/": {
       "filePath": "_authenticated/items/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/mytasks/": {
+      "filePath": "_authenticated/mytasks/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/raw-bom/": {

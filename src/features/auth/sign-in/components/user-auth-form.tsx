@@ -47,6 +47,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       password: '',
     },
   })
+  
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
