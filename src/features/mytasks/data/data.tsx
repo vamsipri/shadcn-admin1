@@ -1,9 +1,9 @@
-import {
-  IconArrowDown,
-  IconArrowRight,
-  IconArrowUp,
+// import {
+//   IconArrowDown,
+//   IconArrowRight,
+//   IconArrowUp,
   
-} from '@tabler/icons-react'
+// } from '@tabler/icons-react'
 // import { MYTasksStatus } from './schema'
 
 // export const callTypes = new Map<MYTasksStatus, string>([
@@ -49,20 +49,4 @@ export const statuses = [
   
 ]
 
-export const priorities = [
-  {
-    label: 'Low',
-    value: 'low',
-    icon: IconArrowDown,
-  },
-  {
-    label: 'Medium',
-    value: 'medium',
-    icon: IconArrowRight,
-  },
-  {
-    label: 'High',
-    value: 'high',
-    icon: IconArrowUp,
-  },
-]
+

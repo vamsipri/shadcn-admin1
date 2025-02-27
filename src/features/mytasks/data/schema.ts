@@ -10,7 +10,7 @@ const MyTasksStatusSchema = z.union([
 const  MyTasksSchema = z.object({
     id: z.string(),
     title:z.string(),
-    status: MyTasksStatusSchema,
+    // status: MyTasksStatusSchema,
     createDate:z.string(),
    startDate:z.string(),
    endDate:z.string(),
