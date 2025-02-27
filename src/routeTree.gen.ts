@@ -149,6 +149,7 @@ const authSignIn2LazyRoute = authSignIn2LazyImport
     getParentRoute: () => rootRoute,
   } as any)
   .lazy(() => import('./routes/(auth)/sign-in-2.lazy').then((d) => d.Route))
+  
 
 const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
   .update({
