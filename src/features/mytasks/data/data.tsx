@@ -33,20 +33,20 @@ export const myTasksTypes = [
 ] as const
 
 
-export const statuses = [
-  {
-    value: 'Active',
-    label: 'Active',
+// export const statuses = [
+//   {
+//     value: 'Active',
+//     label: 'Active',
     
-  },
-  {
-    value: 'InActive',
-    label: 'InActive',
+//   },
+//   {
+//     value: 'InActive',
+//     label: 'InActive',
   
-  },
+//   },
  
   
   
-]
+// ]
 
 
