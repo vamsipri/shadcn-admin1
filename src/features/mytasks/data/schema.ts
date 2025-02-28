@@ -28,5 +28,4 @@ const MyTasksSchema = z.object({
 // Export type for single task
 export type MyTasks = z.infer<typeof MyTasksSchema>;
 
-// Define an array schema for multiple tasks
-export const MytaskListSchema = z.array(MyTasksSchema);
+

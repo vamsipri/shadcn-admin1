@@ -3,12 +3,12 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { columns } from './components/mytasks-column'
-import { DataTable } from './components/mytasks-table'
+// import { columns } from './components/mytasks-column'
+// import { DataTable } from './components/mytasks-table'
 import { MyTasksDialogs } from './components/mytasks-dialogs'
 import { MyTasksPrimaryButtons } from './components/mytasks-primary-button'
 import MyTasksProvider from './context/mytasks-context'
-import {mytasks} from './data/mytasks'
+// import {mytasks} from './data/mytasks'
 
 
 export default function MyTasks() {
@@ -33,7 +33,7 @@ export default function MyTasks() {
           <MyTasksPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <DataTable data={mytasks} columns={columns} />
+          {/* <DataTable data={mytasks} columns={columns} /> */}
         </div>
       </Main>
 
