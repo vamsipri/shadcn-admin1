@@ -1,12 +1,12 @@
 import { ColumnDef } from '@tanstack/react-table';
-// import { Badge } from '@/components/ui/badge';
+ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 // import LongText from '@/components/long-text';
 import { DataTableColumnHeader } from './data-table-column';
 import  {DataTableRowActions} from './data-table-row-actions';
-import { myTasks } from '../data/schema';
+import { MyTasks } from '../data/schema';
 
-export const columns: ColumnDef<myTasks>[] = [
+export const columns: ColumnDef<MyTasks>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -42,15 +42,15 @@ export const columns: ColumnDef<myTasks>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title='Title' />,
     cell: ({ row }) => <div>{row.getValue('title')}</div>,
   },
-  // {
-  //   accessorKey: 'status',
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
-  //   cell: ({ row }) => (
-  //     <Badge variant='outline' className='capitalize'>
-  //       {row.original.status}
-  //     </Badge>
-  //   ),
-  // },
+  {
+    accessorKey: 'status',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
+    cell: ({ row }) => (
+      <Badge variant='outline' className='capitalize'>
+        {row.original.status}
+      </Badge>
+    ),
+  },
   {
     accessorKey: 'createDate',
     header: ({ column }) => <DataTableColumnHeader column={column} title='CreateDate' />,
