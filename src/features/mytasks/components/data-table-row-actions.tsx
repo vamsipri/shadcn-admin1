@@ -11,10 +11,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useMyTasks } from '../context/mytasks-context'
-import {MyTasks} from '../data/schema'
+import {myTasks} from '../data/schema'
 
 interface DataTableRowActionsProps {
-  row: Row<MyTasks>
+  row: Row<myTasks>
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {

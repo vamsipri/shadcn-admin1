@@ -4,9 +4,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 // import LongText from '@/components/long-text';
 import { DataTableColumnHeader } from './data-table-column';
 import  {DataTableRowActions} from './data-table-row-actions';
-import { MyTasks } from '../data/schema';
+import { myTasks } from '../data/schema';
 
-export const columns: ColumnDef<MyTasks>[] = [
+export const columns: ColumnDef<myTasks>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -30,9 +30,9 @@ export const columns: ColumnDef<MyTasks>[] = [
   },
   
   {
-    accessorKey: 'title',
+    accessorKey: 'task_title',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Title' />,
-    cell: ({ row }) => <div>{row.getValue('title')}</div>,
+    cell: ({ row }) => <div>{row.getValue('task_title')}</div>,
   },
   {
     accessorKey: 'status',
@@ -44,38 +44,38 @@ export const columns: ColumnDef<MyTasks>[] = [
     ),
   },
   {
-    accessorKey: 'createDate',
+    accessorKey: 'created_date',
     header: ({ column }) => <DataTableColumnHeader column={column} title='CreateDate' />,
-    cell: ({ row }) => <div>{row.getValue('createDate')}</div>,
+    cell: ({ row }) => <div>{row.getValue('create_date')}</div>,
   },
+  // {
+  //   accessorKey: 'startDate',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title='StartDate' />,
+  //   cell: ({ row }) => <div>{row.getValue('startDate')}</div>,
+  // },
+  // {
+  //   accessorKey: 'endDate',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title='EndDate' />,
+  //   cell: ({ row }) => <div>{row.getValue('endDate')}</div>,
+  // },{
+  //   accessorKey: 'actualStartDate',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title='ActualStartDate' />,
+  //   cell: ({ row }) => <div>{row.getValue('actualStartDate')}</div>,
+  // },
+  // {
+  //   accessorKey: 'actualEndDate',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title='ActualEndDate' />,
+  //   cell: ({ row }) => <div>{row.getValue('actualEndDate')}</div>,
+  // },
   {
-    accessorKey: 'startDate',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='StartDate' />,
-    cell: ({ row }) => <div>{row.getValue('startDate')}</div>,
-  },
-  {
-    accessorKey: 'endDate',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='EndDate' />,
-    cell: ({ row }) => <div>{row.getValue('endDate')}</div>,
-  },{
-    accessorKey: 'actualStartDate',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='ActualStartDate' />,
-    cell: ({ row }) => <div>{row.getValue('actualStartDate')}</div>,
-  },
-  {
-    accessorKey: 'actualEndDate',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='ActualEndDate' />,
-    cell: ({ row }) => <div>{row.getValue('actualEndDate')}</div>,
-  },
-  {
-    accessorKey: 'planName',
+    accessorKey: 'plan_name',
     header: ({ column }) => <DataTableColumnHeader column={column} title='PlanName' />,
-    cell: ({ row }) => <div>{row.getValue('planName')}</div>,
+    cell: ({ row }) => <div>{row.getValue('plan_name')}</div>,
   },
   {
-    accessorKey: 'phaseName',
+    accessorKey: 'plan_phase_name',
     header: ({ column }) => <DataTableColumnHeader column={column} title='PhaseName' />,
-    cell: ({ row }) => <div>{row.getValue('phaseName')}</div>,
+    cell: ({ row }) => <div>{row.getValue('plan_phase_name')}</div>,
   },
    {
       id: 'actions', // Remove accessorKey
