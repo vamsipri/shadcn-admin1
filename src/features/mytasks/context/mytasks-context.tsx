@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
 import {myTasks } from '../data/schema'
 
-type MyTasksDialogType = 'invite' | 'add' | 'edit' | 'delete'
+export type MyTasksDialogType = 'invite' | 'add' | 'edit' | 'delete'
+
 
 interface MyTasksContextType {
   open: MyTasksDialogType | null

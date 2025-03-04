@@ -54,9 +54,10 @@ type MyTasksForm = z.infer<typeof formSchema>
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
+  fetchTasks:() => void
 }
 
-export function MyTasksActionDialog({ open, onOpenChange }: Props) {
+export function MyTasksActionDialog({ open, onOpenChange,fetchTasks }: Props) {
   
   
   
@@ -111,6 +112,7 @@ export function MyTasksActionDialog({ open, onOpenChange }: Props) {
     
         console.log("Response received:", data);
         form.reset();
+        fetchTasks();
         onOpenChange(false); // Close the dialog after success
       } catch (error) {
         console.error("Fetch error:", error);

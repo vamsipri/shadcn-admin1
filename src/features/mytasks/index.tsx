@@ -10,12 +10,13 @@ import { MyTasksDialogs } from './components/mytasks-dialogs'
 import { MyTasksPrimaryButtons } from './components/mytasks-primary-button'
 import MyTasksProvider from './context/mytasks-context'
 
+
 export default function MyTasks() {
   const [tasks, setTasks] = useState([]) // Store fetched data
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
+  
     const fetchTasks = async () => {
       try {
         const response = await fetch('https://amogademo-postgrest.morr.biz/task', {
@@ -35,10 +36,12 @@ export default function MyTasks() {
       } finally {
         setLoading(false)
       }
-    }
-    fetchTasks()
-  }, [])
-
+   
+  }
+  useEffect(() => {
+    fetchTasks();
+  
+  }, []);
   return (
     <MyTasksProvider>
       <Header fixed>
@@ -71,7 +74,9 @@ export default function MyTasks() {
         </div>
       </Main>
 
-      <MyTasksDialogs />
+      {/* <MyTasksDialogs  /> */}
+      <MyTasksDialogs fetchTasks={fetchTasks}  />
+      {/* <MyTasksDialogs fetchTasks={fetchTasks}  /> */}
     </MyTasksProvider>
   )
 }
