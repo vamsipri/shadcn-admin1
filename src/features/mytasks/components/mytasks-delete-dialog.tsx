@@ -1,40 +1,77 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+
+interface Task {
+  task_id: number;
+  task_title: string;
+  status: string;
+  created_date?: string;
+  plan_start_date?: string;
+  plan_end_date?: string;
+  actual_start_date?: string;
+  actual_end_date?: string;
+  plan_name?: string;
+  plan_phase_name?: string;
+}
+
 
 interface MyTaskDeleteDialogProps {
   open: boolean;
-  onOpenChange: (open: boolean) => void; // ✅ Ensure boolean type
-  currentRow: { id: number } | null; // ✅ Receive selected task
-  // onDelete: (id: number) => void; // ✅ Function to delete task
+  onOpenChange: (open: boolean) => void;
+  task: Task;
+  onDelete: () => Promise<void>;
 }
 
-export function MyTaskDeleteDialog({ open, onOpenChange, currentRow}: MyTaskDeleteDialogProps) {
-    console.log("Rendering MyTaskDeleteDialog, currentRow:", currentRow);
-    
+export function MyTaskDeleteDialog({ 
+  open, 
+  onOpenChange, 
+  // task, 
+  onDelete 
+}: MyTaskDeleteDialogProps) {
+  const [loading, setLoading] = useState(false);
+
+  const handleDelete = async () => {
+    setLoading(true);
+    try {
+      await onDelete();
+    } catch (error) {
+      console.error('Error during delete operation:', error);
+    } finally {
+      setLoading(false);
+      onOpenChange(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Delete Task</DialogTitle>
           <DialogDescription>
-              {currentRow ? `Are you sure you want to delete task ID: ${currentRow.id}?` : "No task selected."}
+            Are you sure you want to delete this task?
           </DialogDescription>
         </DialogHeader>
+
+       
         <DialogFooter>
-          <Button
-            variant="destructive"
-            onClick={() => {
-              if (!currentRow || !currentRow.id) {
-                console.error("Error: currentRow is undefined or missing ID");
-                return;
-              }
-              console.log("Deleting task with ID:", currentRow.id);
-              // onDelete(currentRow.id);
-            }}
-          >
-            Yes, Delete
+          <Button variant="outline" onClick={() => onOpenChange(false)}>
+            Cancel
           </Button>
-          <Button onClick={() => onOpenChange(false)}>Cancel</Button>
+          <Button variant="destructive" onClick={handleDelete} disabled={loading}>
+  {loading ? 'Deleting...' : 'Delete'}
+</Button>
+
+          {/* <Button variant="destructive" onClick={handleDelete} >
+            Delete
+          </Button> */}
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -1,52 +1,223 @@
-import { useMyTasks } from '../context/mytasks-context'
-import { MyTasksActionDialog } from './mytasks-action-dialog'
-// import { MyTaskDeleteDialog } from './mytasks-delete-dialog';
+// import { useState } from 'react';
+// import { useMyTasks } from '../context/mytasks-context'; 
+// import { MyTasksActionDialog } from './mytasks-action-dialog'; 
+// import { MyTaskDeleteDialog } from './mytasks-delete-dialog'; 
 
-// import { UsersInviteDialog } from './users-invite-dialog'
+// interface Task {
+//   task_id: number;
+//   title: string;
+//   status: string;
+//   due_date: string;
+//   description?: string;
+//   created_date?: string;
+//   plan_start_date?: string;
+//   plan_end_date?: string;
+//   actual_start_date?: string;
+//   actual_end_date?: string;
+//   plan_name?: string;
+//   plan_phase_name?: string;
+// }
+
+// interface MyTasksDialogsProps {
+//   fetchTasks: () => Promise<void>;
+//   onDelete: (taskId: number) => Promise<void>;
+//   authToken: string;
+// }
+
+// export const MyTasksDialogs: React.FC<MyTasksDialogsProps> = ({ 
+//   fetchTasks, 
+//   onDelete, 
+//   authToken 
+// }) => {
+//   const { open, setOpen, currentRow, setCurrentRow } = useMyTasks();
+//   const [isDeleting, setIsDeleting] = useState(false);
+
+//   const handleDialogClose = () => {
+//     setTimeout(() => {
+//       setCurrentRow(null);
+//     }, 300);
+//   };
+
+//   const handleDelete = async () => {
+//     if (!currentRow) return;
+
+//     setIsDeleting(true);
+//     try {
+//       await onDelete(currentRow.task_id);
+//       setOpen(null);
+//       handleDialogClose();
+//     } catch (error) {
+//       console.error('Error deleting task:', error);
+//       alert('Failed to delete task. Please try again.');
+//     } finally {
+//       setIsDeleting(false);
+//     }
+//   };
+
+//   return (
+//     <>
+//       {/* Dialog for adding a new task */}
+//       <MyTasksActionDialog
+//         key="task-add"
+//         open={open === 'add'}
+//         onOpenChange={(state) => {
+//           setOpen(state ? 'add' : null);
+//           if (!state) handleDialogClose();
+//         }}
+//         fetchTasks={fetchTasks}
+//         authToken={authToken}
+//         mode="add"
+//       />
+
+//       {/* Dialogs for editing or deleting a task */}
+//       {currentRow && (
+//         <>
+//           {/* Dialog for editing an existing task */}
+//           <MyTasksActionDialog
+//             key={`task-edit-${currentRow.task_id}`}
+//             open={open === 'edit'}
+//             onOpenChange={(state) => {
+//               setOpen(state ? 'edit' : null);
+//               if (!state) handleDialogClose();
+//             }}
+//             fetchTasks={fetchTasks}
+//             initialData={{
+//               task_id: currentRow.task_id,
+//               task_title: currentRow.title,
+//               status: currentRow.status,
+//               description: currentRow.description,
+//               due_date: currentRow.due_date,
+//               created_date: currentRow.created_date,
+//               plan_start_date: currentRow.plan_start_date,
+//               plan_end_date: currentRow.plan_end_date,
+//               actual_start_date: currentRow.actual_start_date,
+//               actual_end_date: currentRow.actual_end_date,
+//               plan_name: currentRow.plan_name,
+//               plan_phase_name: currentRow.plan_phase_name,
+//             }}
+//             authToken={authToken}
+//             mode="edit"
+//           />
+
+//           {/* Dialog for deleting a task */}
+//           <MyTaskDeleteDialog
+//             key={`task-delete-${currentRow.task_id}`}
+//             open={open === 'delete'}
+//             onOpenChange={(state) => {
+//               setOpen(state ? 'delete' : null);
+//               if (!state) handleDialogClose();
+//             }}
+//             task={currentRow}
+//             onDelete={handleDelete}
+//             isDeleting={isDeleting}
+//           />
+//         </>
+//       )}
+//     </>
+//   );
+// };
+
+// export default MyTasksDialogs;
+import { useState } from 'react';
+import { useMyTasks } from '../context/mytasks-context'; 
+import { MyTasksActionDialog } from './mytasks-action-dialog'; 
+import { MyTaskDeleteDialog } from './mytasks-delete-dialog'; 
+
 interface MyTasksDialogsProps {
-  fetchTasks: () => void;
-  // onDelete: (taskId: number) => void; // ✅ Define fetchTasks as a function that returns void
+  fetchTasks: () => Promise<void>;
+  onDelete: (taskId: number) => Promise<void>;
+  authToken: string;
 }
 
-export function MyTasksDialogs({ fetchTasks}: MyTasksDialogsProps) {
-  const { open, setOpen, currentRow, setCurrentRow } = useMyTasks()
+export const MyTasksDialogs: React.FC<MyTasksDialogsProps> = ({ 
+  fetchTasks, 
+  onDelete, 
+  authToken 
+}) => {
+  const { open, setOpen, currentRow, setCurrentRow } = useMyTasks();
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDialogClose = () => {
+    setTimeout(() => {
+      setCurrentRow(null);
+    }, 300);
+  };
+
+  const handleDelete = async () => {
+    if (!currentRow) return;
+
+    setIsDeleting(true);
+    try {
+      await onDelete(currentRow.task_id);
+      setOpen(null);
+      handleDialogClose();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      alert('Failed to delete task. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <>
+      {/* Dialog for adding a new task */}
       <MyTasksActionDialog
-        key="user-add"
-        open={open === "add"}
-        onOpenChange={() => setOpen("add")}
+        key="task-add"
+        open={open === 'add'}
+        onOpenChange={(state) => {
+          setOpen(state ? 'add' : null);
+          if (!state) handleDialogClose();
+        }}
         fetchTasks={fetchTasks}
+        authToken={authToken}
+        mode="add"
       />
-  
+
+      {/* Dialogs for editing or deleting a task */}
       {currentRow && (
         <>
+          {/* Dialog for editing an existing task */}
           <MyTasksActionDialog
-            key={`user-edit-${currentRow.id}`}
-            open={open === "edit"}
-            onOpenChange={() => {
-              setOpen("edit");
-              setTimeout(() => {
-                setCurrentRow(null);
-              }, 500);
+            key={`task-edit-${currentRow.task_id}`}
+            open={open === 'edit'}
+            onOpenChange={(state) => {
+              setOpen(state ? 'edit' : null);
+              if (!state) handleDialogClose();
             }}
             fetchTasks={fetchTasks}
-          />
-  
-          {/* <MyTaskDeleteDialog
-            key={`user-delete-${currentRow.id}`}
-            open={open === "delete"}
-            onOpenChange={() => setOpen(null)} // ✅ Fix type mismatch
-            currentRow={currentRow}
-            onDelete={(id) => {
-              console.log("Delete function called for ID:", id);
-              // Call your DELETE API function here
+            initialData={{
+              task_id: currentRow.task_id,
+              task_title: currentRow.task_title,
+              status: currentRow.status,
+              created_date: currentRow.created_date,
+              plan_start_date: currentRow.plan_start_date,
+              plan_end_date: currentRow.plan_end_date,
+              actual_start_date: currentRow.actual_start_date,
+              actual_end_date: currentRow.actual_end_date,
+              plan_name: currentRow.plan_name,
+              plan_phase_name: currentRow.plan_phase_name,
             }}
-          /> */}
+            authToken={authToken}
+            mode="edit"
+          />
+
+          {/* Dialog for deleting a task */}
+          <MyTaskDeleteDialog
+            key={`task-delete-${currentRow.task_id}`}
+            open={open === 'delete'}
+            onOpenChange={(state) => {
+              setOpen(state ? 'delete' : null);
+              if (!state) handleDialogClose();
+            }}
+            task={currentRow}
+            onDelete={handleDelete}
+          
+          />
         </>
       )}
     </>
-  ); // ✅ Ensure JSX fragment is properly closed here
-  
-   
-}
+  );
+};
+
+export default MyTasksDialogs;

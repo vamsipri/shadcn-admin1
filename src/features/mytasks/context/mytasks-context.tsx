@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
-import {myTasks } from '../data/schema'
+import { myTasks } from '../data/schema'
 
 export type MyTasksDialogType = 'invite' | 'add' | 'edit' | 'delete'
-
 
 interface MyTasksContextType {
   open: MyTasksDialogType | null
@@ -23,9 +22,9 @@ export default function RawsProvider({ children }: Props) {
   const [currentRow, setCurrentRow] = useState<myTasks | null>(null)
 
   return (
-    <MyTasksContext value={{ open, setOpen, currentRow, setCurrentRow }}>
+    <MyTasksContext.Provider value={{ open, setOpen, currentRow, setCurrentRow }}>
       {children}
-    </MyTasksContext>
+    </MyTasksContext.Provider>
   )
 }
 
