@@ -52,9 +52,14 @@ export default function MyTasks() {
     }
   };
 
-  // Delete a task
+ 
+
+    
   const deleteTask = async (taskId: number) => {
     try {
+      // Hide any existing message immediately
+      setFeedbackMessage(null);
+  
       const response = await fetch(`${API_URL}?task_id=eq.${taskId}`, {
         method: "DELETE",
         headers: {
@@ -63,25 +68,38 @@ export default function MyTasks() {
           Prefer: "return=representation",
         },
       });
-
+  
       if (!response.ok) {
         throw new Error(`Failed to delete task. Status: ${response.status}`);
       }
-
+  
       setFeedbackMessage("Task deleted successfully!");
+  
+      // Fetch updated tasks after deletion
       fetchTasks();
+  
+      // Automatically hide feedback after 3 seconds
+      setTimeout(() => {
+        setFeedbackMessage(null);
+      }, 3000);
     } catch (error) {
-      if (error instanceof Error) {
-        setFeedbackMessage(`Failed to delete task: ${error.message}`);
-      } else {
-        setFeedbackMessage("Failed to delete task due to an unknown error.");
-      }
+      setFeedbackMessage(
+        error instanceof Error ? `Failed to delete task: ${error.message}` : "Failed to delete task due to an unknown error."
+      );
+  
+      // Hide error message after 5 seconds
+      setTimeout(() => {
+        setFeedbackMessage(null);
+      }, 5000);
     }
   };
-
  useEffect(() => {
     fetchTasks();
   }, []);
+  // useEffect(() => {
+  //   console.log("Feedback Message Changed:", feedbackMessage);
+  // }, [feedbackMessage]);
+  
 
   return (
     <MyTasksProvider>
@@ -112,6 +130,11 @@ export default function MyTasks() {
   ) : (
     <DataTable data={tasks} columns={columns} />
   )}
+    {feedbackMessage && (
+            <div className="mt-2 p-2 bg-green-100 text-green-800 border border-green-400 rounded">
+              {feedbackMessage}
+            </div>
+          )}
   {/* {feedbackMessage && <p className="text-green-500 mt-2">{feedbackMessage}</p>} */}
 </div>
 
